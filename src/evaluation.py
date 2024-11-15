@@ -1,7 +1,6 @@
-import numpy as np
 import matplotlib.pyplot as plt
 
-def calculate_mse_manual(y_true, y_pred):
+def calculate_mse(y_true, y_pred):
     """
     Calcula o Erro Médio Quadrático (MSE) manualmente.
     """
@@ -10,11 +9,11 @@ def calculate_mse_manual(y_true, y_pred):
         error += (yt - yp) ** 2
     return error / len(y_true)
 
-def calculate_rmse_manual(y_true, y_pred):
+def calculate_rmse(y_true, y_pred):
     """
     Calcula a Raiz do Erro Médio Quadrático (RMSE) manualmente.
     """
-    mse = calculate_mse_manual(y_true, y_pred)
+    mse = calculate_mse(y_true, y_pred)
     return mse ** 0.5
 
 def plot_comparison(x, y_true, y_pred):
