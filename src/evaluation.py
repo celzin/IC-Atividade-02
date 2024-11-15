@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 def calculate_mse_manual(y_true, y_pred):
     """
-    Calculate Mean Squared Error manually.
+    Calcula o Erro Médio Quadrático (MSE) manualmente.
     """
     error = 0
     for yt, yp in zip(y_true, y_pred):
@@ -12,28 +12,21 @@ def calculate_mse_manual(y_true, y_pred):
 
 def calculate_rmse_manual(y_true, y_pred):
     """
-    Calculate Root Mean Squared Error manually.
+    Calcula a Raiz do Erro Médio Quadrático (RMSE) manualmente.
     """
     mse = calculate_mse_manual(y_true, y_pred)
     return mse ** 0.5
 
 def plot_comparison(x, y_true, y_pred):
     """
-    Plot true function and fuzzy approximation.
+    Plota a função real e a aproximação fuzzy.
     """
-    plt.figure(figsize=(10, 6))
-    plt.plot(x, y_true, label='True Function', linewidth=2)
-    plt.plot(x, y_pred, label='Fuzzy Approximation', linestyle='--')
-    plt.xlabel('x')
-    plt.ylabel('f(x)')
-    plt.title('True Function vs. Fuzzy Approximation')
-    plt.legend()
-    plt.grid()
-    plt.show()
+    for i in range(0, len(x), len(x) // 10):
+        print(f"x = {x[i]:.2f}, Real: {y_true[i]:.4f}, Aproximado: {y_pred[i]:.4f}")
 
 def plot_error(x, y_true, y_pred):
     """
-    Plot error between true function and fuzzy approximation.
+    Mostra os erros calculados entre o valor real e aproximado.
     """
     error = y_true - y_pred
     plt.figure(figsize=(10, 6))
