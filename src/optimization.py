@@ -1,34 +1,30 @@
 import numpy as np
 
-def recursive_least_squares(X, Y, lambda_reg=0.99):
+def recursive_least_squares(x_i, y_i, theta, P, lambda_reg=0.99):
     """
-    Otimização usando Recursive Least Squares (RLS).
+    Atualiza os parâmetros usando Recursive Least Squares (RLS) para uma única entrada.
     
     Args:
-        X (numpy.ndarray): Matriz de características de entrada.
-        Y (numpy.ndarray): Vetor de valores-alvo.
+        x_i (numpy.ndarray): Vetor de entrada para a amostra atual.
+        y_i (float): Valor alvo para a amostra atual.
+        theta (numpy.ndarray): Vetor de parâmetros atuais (coeficientes a serem ajustados).
+        P (numpy.ndarray): Matriz de covariância.
         lambda_reg (float): Fator de esquecimento (0 < lambda_reg <= 1).
     
     Returns:
-        numpy.ndarray: Vetor de parâmetros (pesos) ajustados.
+        tuple: Vetor de parâmetros atualizado e matriz de covariância atualizada.
     """
-    # Inicializa a matriz de covariância P e o vetor de parâmetros theta
-    P = np.eye(X.shape[1]) * 1e6
-    theta = np.zeros(X.shape[1])
+    # Converter x_i para um vetor coluna
+    x_i = x_i.reshape(-1, 1)
     
-    for i in range(X.shape[0]):
-        # Extrai o vetor de entrada atual
-        x_i = X[i, :].reshape(-1, 1)
-        # Valor alvo correspondente
-        y_i = Y[i]
-        
-        # Calcula o ganho de Kalman
-        K = P @ x_i / (lambda_reg + x_i.T @ P @ x_i)
-        
-        # Atualiza os parâmetros com base no erro atual
-        theta += (K.flatten() * (y_i - theta @ x_i.flatten()))
-        
-        # Atualiza a matriz de covariância
-        P = (P - K @ x_i.T @ P) / lambda_reg
+    # Calcular o ganho de Kalman
+    K = P @ x_i / (lambda_reg + x_i.T @ P @ x_i)
     
-    return theta
+    # Atualizar os parâmetros com base no erro atual
+    error = y_i - (theta @ x_i).item()
+    theta = theta + (K.flatten() * error)
+    
+    # Atualizar a matriz de covariância
+    P = (P - K @ x_i.T @ P) / lambda_reg
+    
+    return theta, P
