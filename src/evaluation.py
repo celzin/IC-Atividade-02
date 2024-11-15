@@ -21,18 +21,25 @@ def plot_comparison(x, y_true, y_pred):
     """
     Plota a função real e a aproximação fuzzy.
     """
-    for i in range(0, len(x), len(x) // 10):
-        print(f"x = {x[i]:.2f}, Real: {y_true[i]:.4f}, Aproximado: {y_pred[i]:.4f}")
+    plt.figure(figsize=(10, 6))
+    plt.plot(x, y_true, label='Função Real', linewidth=2)
+    plt.plot(x, y_pred, label='Aproximação Fuzzy', linestyle='--')
+    plt.xlabel('x')
+    plt.ylabel('f(x)')
+    plt.title('Função Real vs. Aproximação Fuzzy')
+    plt.legend()
+    plt.grid()
+    plt.show()
 
 def plot_error(x, y_true, y_pred):
     """
-    Mostra os erros calculados entre o valor real e aproximado.
+    Plota o erro entre a função real e a aproximação fuzzy.
     """
-    error = y_true - y_pred
+    error = [yt - yp for yt, yp in zip(y_true, y_pred)]
     plt.figure(figsize=(10, 6))
-    plt.plot(x, error, label='Error', color='red')
+    plt.plot(x, error, label='Erro', color='red')
     plt.xlabel('x')
-    plt.ylabel('Error')
-    plt.title('Error between True Function and Fuzzy Approximation')
+    plt.ylabel('Erro')
+    plt.title('Erro entre a Função Real e a Aproximação Fuzzy')
     plt.grid()
     plt.show()
