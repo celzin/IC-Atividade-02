@@ -16,29 +16,29 @@ def calculate_rmse(y_true, y_pred):
     mse = calculate_mse(y_true, y_pred)
     return mse ** 0.5
 
-def plot_comparison(x, y_true, y_pred):
+def plot_comparison(x, y_true, y_pred, title_config):
     """
-    Plota a função real e a aproximação fuzzy.
+    Plota a função real e a aproximação fuzzy com título detalhado.
     """
     plt.figure(figsize=(10, 6))
     plt.plot(x, y_true, label='Função Real', linewidth=2)
     plt.plot(x, y_pred, label='Aproximação Fuzzy', linestyle='--')
     plt.xlabel('x')
     plt.ylabel('f(x)')
-    plt.title('Função Real vs. Aproximação Fuzzy')
+    plt.title(f'Função Real vs. Aproximação Fuzzy\n{title_config}')
     plt.legend()
     plt.grid()
     plt.show()
 
-def plot_error(x, y_true, y_pred):
+def plot_error(x, y_true, y_pred, title_config):
     """
-    Plota o erro entre a função real e a aproximação fuzzy.
+    Plota o erro entre a função real e a aproximação fuzzy com título detalhado.
     """
     error = [yt - yp for yt, yp in zip(y_true, y_pred)]
     plt.figure(figsize=(10, 6))
     plt.plot(x, error, label='Erro', color='red')
     plt.xlabel('x')
     plt.ylabel('Erro')
-    plt.title('Erro entre a Função Real e a Aproximação Fuzzy')
+    plt.title(f'Erro entre a Função Real e a Aproximação Fuzzy\n{title_config}')
     plt.grid()
     plt.show()
