@@ -48,3 +48,37 @@ python main.py
     <td><a href="https://t.me/celso_vsf"><img align="center" height="20px" width="90px" src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"/> </td>
   </tr>
 </table>
+
+<!-- Inteligência Computacional
+
+Atividade - Sistema Fuzzy Funcional
+
+Implementar um sistema fuzzy de Takagi-Sugeno de ordem zero ou primeira ordem para aproximar a seguinte função não linear: f(x) = e^(−x/5) · sin(3x) + 0.5 · sin(x). A aproximação deve estar no intervalo x ∈[0, 10]. O sistema deve aproximar essa função com o menor erro possível dentro do intervalo especificado.
+
+Etapas:
+
+1. Ideia Geral
+  • Gere um conjunto de dados com valores de x no intervalo de [0, 10] e calcule os valores correspondentes de f(x) para esses pontos. Atenção para gerar um número suficiente de pontos.
+  • Defina a estrutura do sistema fuzzy de Takagi-Sugeno (ordem zero ou primeira ordem).
+  • Escolha as variáveis linguísticas e defina funções de pertinência que cubram o intervalo de x.
+  • Teste diferentes combinações de operadores fuzzy e funções de pertinência. Lembrem-se, inicialmente fazer usando o padrão (benckmark) e depois fazer as variações.
+  • Avalie o desempenho do modelo comparando os valores aproximados pelo sistema com os valores reais de f(x) no intervalo de [0, 10]. Use o MSE (Mean Square Error) ou RMSE (Root Mean Square Error) para a comparação. Otimizar a solução tendo em vista reduzir o erro de aproximação.
+  • Se necessário, pode usar o RLS (Recursive Least Square) ou Gradiente Descendente para encontrar os valores dos parâmetros do consequente.
+  • O sistema deve ser desenvolvido em linha de código e pode ser implementado em Python. Não devem ser utilizadas ToolBoxs, Bibliotecas, etc. Porém, para implementar o RLS, Gradiente e Visualização Gráfica podem ser utilizadas estruturas de código prontas e bibliotecas.
+
+2. Apresente um relatório contendo (Saída no terminal):
+  • Descrição detalhada do sistema fuzzy desenvolvido, incluindo variáveis linguísticas, funções de pertinência, operadores fuzzy e funções de pertinência utilizadas.
+  • Gráficos comparando a curva da função f(x) com a curva aproximada pelo seu modelo fuzzy.
+  • Gráficos ilustrando o erro.
+  • A métrica de erro final obtida e uma análise sobre as combinações testadas, destacando as configurações que trouxeram melhores resultados.
+
+3. Critérios de Avaliação
+  • Configuração correta e detalhada do sistema fuzzy de Takagi-Sugeno.
+  • Qualidade e precisão da aproximação da função alvo f(x).
+  • Variedade e análise das combinações testadas (operadores, funções de ativação, etc.).
+  • Clareza na apresentação do relatório e dos resultados obtidos.
+
+4. Dicas
+  • Explore diferentes tipos de funções de pertinência e operadores fuzzy. Testar várias combinações pode revelar configurações que melhor se adaptam ao comportamento complexo da função.
+  • Analise o impacto das mudanc ̧as nos operadores e nas funções de ativação para otimizar a modelagem.
+  • As etapas listadas são somente um direcionamento do que deve ser feito. -->s
