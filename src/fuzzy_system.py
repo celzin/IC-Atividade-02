@@ -1,20 +1,22 @@
 import numpy as np
-from optimization import recursive_least_squares  # Importando o RLS existente
+from optimization import recursive_least_squares
 
 class FuzzySystemTS:
-    def __init__(self, num_rules=3, order=1, membership_type='gaussian', operator='min'):
+    def __init__(self, num_rules=3, order=1, membership_type='gaussian', operator='min', sigma_factor=0.5):
         """
         Inicializa o sistema fuzzy Takagi-Sugeno.
         Args:
             num_rules (int): Número de regras fuzzy.
             order (int): Ordem do modelo Takagi-Sugeno (0 ou 1).
             membership_type (str): Tipo de função de pertinência ('gaussian', 'triangular', 'trapezoidal').
-            operator (str): Operador fuzzy para combinar pertinências ('min' ou 'prod').
+            operator (str): Operador fuzzy para combinar pertinências ('min', 'prod', 'max', 'soma', 'media').
+            sigma_factor (float): Fator de escala para ajustar a largura das gaussianas.
         """
         self.num_rules = num_rules
         self.order = order
         self.membership_type = membership_type
-        self.operator = operator  # Armazena o operador selecionado
+        self.operator = operator
+        self.sigma_factor = sigma_factor  # Ajusta a largura das gaussianas
         self.membership_functions = []
         self.consequents = np.zeros((num_rules, 2))  # (a, b) para cada regra
         self.P = [np.eye(2) * 1e6 for _ in range(num_rules)]  # Matriz P para cada regra
@@ -25,10 +27,11 @@ class FuzzySystemTS:
         """
         min_x, max_x = x_range
         step = (max_x - min_x) / (self.num_rules - 1)
+        sigma = step * self.sigma_factor  # Ajusta a largura com base no fator
         for i in range(self.num_rules):
             center = min_x + i * step
             if self.membership_type == 'gaussian':
-                self.membership_functions.append((center, step / 2))
+                self.membership_functions.append((center, sigma))
             elif self.membership_type == 'triangular':
                 left = max(min_x, center - step)
                 right = min(max_x, center + step)
@@ -61,10 +64,9 @@ class FuzzySystemTS:
     
     def gaussian(self, x, center, width):
         """
-        Função de pertinência Gaussiana.
+        Função de pertinência Gaussiana usando numpy para maior precisão.
         """
-        exponent = -((x - center) ** 2) / (2 * width ** 2)
-        return self.exp(exponent)
+        return np.exp(-((x - center) ** 2) / (2 * width ** 2))
     
     def triangular(self, x, left, center, right):
         """
@@ -91,17 +93,6 @@ class FuzzySystemTS:
         elif right < x < shoulder_right:
             return (shoulder_right - x) / (shoulder_right - right)
         return 0
-    
-    def exp(self, value):
-        """
-        Aproximação manual da função exponencial.
-        """
-        result = 1
-        term = 1
-        for i in range(1, 15):
-            term *= value / i
-            result += term
-        return result
 
     def infer(self, x, desired_output=None):
         """
@@ -112,8 +103,14 @@ class FuzzySystemTS:
         # Combinar pertinências usando o operador especificado
         if self.operator == 'prod':
             combined_membership = np.prod(memberships)
+        elif self.operator == 'max':
+            combined_membership = max(memberships)
+        elif self.operator == 'soma':
+            combined_membership = sum(memberships)
+        elif self.operator == 'media':
+            combined_membership = sum(memberships) / len(memberships)
         else:  # Default para 'min'
-            combined_membership = np.min(memberships)
+            combined_membership = min(memberships)
         
         sum_memberships = sum(memberships)
 
