@@ -30,6 +30,6 @@ def run_test(num_rules, order, membership_type, operator):
 
 # Executar testes com diferentes configurações
 print("Testes com Operadores Fuzzy e Funções de Pertinência:")
-run_test(num_rules=10, order=1, membership_type='gaussian', operator='min')
-run_test(num_rules=10, order=1, membership_type='triangular', operator='prod')
+run_test(num_rules=10, order=1, membership_type='gaussian', operator='prod')
+run_test(num_rules=10, order=1, membership_type='triangular', operator='min')
 run_test(num_rules=10, order=1, membership_type='trapezoidal', operator='max')
