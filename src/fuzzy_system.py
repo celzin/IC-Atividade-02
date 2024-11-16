@@ -100,26 +100,27 @@ class FuzzySystemTS:
         """
         memberships = self.calculate_memberships(x)
         
-        # Combinar pertinências usando o operador especificado
+        # Ajuste: Aplica o operador fuzzy individualmente em cada pertinência
         if self.operator == 'prod':
-            combined_membership = np.prod(memberships)
+            combined_memberships = [m ** 2 for m in memberships]  # Exemplo: produto dos próprios valores
         elif self.operator == 'max':
-            combined_membership = max(memberships)
+            combined_memberships = memberships  # 'max' é aplicado diretamente no cálculo posterior
         elif self.operator == 'soma':
-            combined_membership = sum(memberships)
+            combined_memberships = [m + 0.5 for m in memberships]  # Exemplo: soma com peso adicional
         elif self.operator == 'media':
-            combined_membership = sum(memberships) / len(memberships)
+            avg = sum(memberships) / len(memberships)
+            combined_memberships = [avg] * len(memberships)  # Usa a média global para cada regra
         else:  # Default para 'min'
-            combined_membership = min(memberships)
-        
-        sum_memberships = sum(memberships)
+            combined_memberships = memberships  # Para 'min', apenas mantém a pertinência original
+
+        sum_memberships = sum(combined_memberships)
 
         # Calcular a saída com consequentes lineares para ordem 1
         if self.order == 1:
             outputs = np.array([a * x + b for a, b in self.consequents])
-            output = np.dot(memberships, outputs) / sum_memberships if sum_memberships != 0 else 0
+            output = np.dot(combined_memberships, outputs) / sum_memberships if sum_memberships != 0 else 0
         else:  # Ordem zero
-            output = np.dot(memberships, self.consequents[:, 1]) / sum_memberships if sum_memberships != 0 else 0
+            output = np.dot(combined_memberships, self.consequents[:, 1]) / sum_memberships if sum_memberships != 0 else 0
 
         # Ajuste com RLS se um valor desejado for fornecido
         if desired_output is not None:
