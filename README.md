@@ -81,4 +81,4 @@ Etapas:
 4. Dicas
   • Explore diferentes tipos de funções de pertinência e operadores fuzzy. Testar várias combinações pode revelar configurações que melhor se adaptam ao comportamento complexo da função.
   • Analise o impacto das mudanc ̧as nos operadores e nas funções de ativação para otimizar a modelagem.
-  • As etapas listadas são somente um direcionamento do que deve ser feito. -->s
+  • As etapas listadas são somente um direcionamento do que deve ser feito. -->
