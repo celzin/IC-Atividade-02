@@ -13,7 +13,7 @@
 # 📝 Resumo
 
 <div align="justify">
-Este trabalho apresenta a implementação de um sistema fuzzy baseado no modelo Takagi-Sugeno (TS) de primeira ordem, projetado para aproximar uma função real $f(x)$ por meio de combinações ponderadas de regras fuzzy. A escolha pela primeira ordem deve-se à tentativa de modelar relações lineares locais, o que busca melhorar a precisão em relação ao modelo de ordem zero.
+Este trabalho apresenta a implementação de um sistema fuzzy baseado no modelo Takagi-Sugeno (TS) de primeira ordem, projetado para aproximar uma função real f(x) por meio de combinações ponderadas de regras fuzzy. A escolha pela primeira ordem deve-se à tentativa de modelar relações lineares locais, o que busca melhorar a precisão em relação ao modelo de ordem zero.
 
 O sistema foi desenvolvido na linguagem `Python`, empregando bibliotecas para tarefas complementares. A biblioteca `NumPy` foi utilizada para os cálculos matemáticos, incluindo a implementação do método Recursive Least Squares (RLS). Já a biblioteca `Matplotlib` foi responsável pela geração dos gráficos comparativos. Além disso, como requisito da atividade, funções de pertinência, operadores fuzzy e o cálculo do erro foram implementados diretamente, sem o uso de bibliotecas ou estruturas prontas, seguindo as diretrizes propostas para fins didáticos e para oferecer maior envolvimento prático no desenvolvimento.
 </div>
