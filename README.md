@@ -24,10 +24,10 @@ O sistema foi desenvolvido na linguagem `Python`, empregando bibliotecas para ta
 Para executar o programa, siga os passos abaixo:
 
 - Abra o terminal no diretório onde os arquivos do projeto estão localizados.
-- Certifique-se de que as bibliotecas `numpy`, `matplotlib` e `scipy` estão instalados:
+- Certifique-se de que as bibliotecas `numpy`, `matplotlib` estão instalados:
 
 ```bash
-pip install numpy matplotlib scipy
+pip install numpy matplotlib
 ```
 
 - Em seguida, execute o programa com o comando:
